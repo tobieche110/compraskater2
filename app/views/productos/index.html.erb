@@ -1,0 +1,59 @@
+<%= render "welcome/navbar" %>
+
+<% if user_signed_in? %>
+  <div class="container-xl">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 mx-auto">
+        <h1 style="padding-top: 2%;">Administrar Productos</h1>
+      </div>
+      <div class="col-md-6 col-sm-12 mx-auto d-grid gap-2 d-md-flex justify-content-md-end" style="padding-top: 1%;">
+        <%= link_to "Agregar Productos", new_producto_path, class: "btn btn-nav btn-light btn-outline-dark" %>
+      </div>
+    </div>
+
+    <% if flash[:error].present? %>
+      <p style="color: red"><%= flash[:error] %></p>
+    <% end %>
+
+    <% if flash[:success].present? %>
+      <p style="color: green"><%= flash[:success] %></p>
+    <% end %>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#id</th>
+          <th scope="col">Nombre del Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Imagen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @productos.each do |producto| %>
+          <tr>
+            <th scope="row"><%= producto.id %></th>
+            <td><%= producto.nombre %></td>
+            <td><%= producto.precio %></td>
+            <td><%= producto.marca %></td>
+            <td><%= producto.tipo %></td>
+            <% if producto.img.attached?%>
+              <td><%= image_tag(producto.img, style: "width: 100px;") %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <td>
+              <%= link_to "Editar", edit_producto_path(producto), class: "btn btn-primary" %>
+              <%= button_to "Eliminar", producto_path(producto), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este artículo?' }, class: "btn btn-danger", remote: true %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>Por favor, ingrese sesión como administrador</p>
+<% end %>
+
+<%= render "welcome/footer" %>

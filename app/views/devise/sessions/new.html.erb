@@ -1,0 +1,32 @@
+<%= render "welcome/navbar" %>
+
+   <main style="border-bottom: 1px solid black; padding-bottom: 25px;">
+    <div class="container-sm">
+      <h1>Iniciar sesión como administrador</h1>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <%= f.label :email, style: "font-size: 20px" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "Ingrese su correo electrónico", required: true %>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <%= f.label :password, style: "font-size: 20px" %>
+          <%= f.password_field :password, class: "form-control", placeholder: "Ingrese su contraseña", required: true %>
+        </div>
+
+        <br>
+        <div class="actions" style="padding-bottom: 1%">
+          <%= f.submit "Iniciar Sesión", class: "btn btn-dark btn-outline-light", name: "login" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </div>
+  </main>
+
+
+<%= render "welcome/footer" %>

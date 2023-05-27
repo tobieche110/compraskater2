@@ -1,0 +1,111 @@
+<!--
+<%= form_with(model: producto) do |form| %>
+  <% if producto.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(producto.errors.count, "error") %> prohibited this producto from being saved:</h2>
+
+      <ul>
+        <% producto.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+
+  <div>
+    <%= form.label :precio, style: "display: block" %>
+    <%= form.text_field :precio %>
+  </div>
+
+  <div>
+    <%= form.label :marca, style: "display: block" %>
+    <%= form.text_field :marca %>
+  </div>
+
+  <div>
+    <%= form.label :tipo, style: "display: block" %>
+    <%= form.text_field :tipo %>
+  </div>
+
+  <div>
+    <%= form.label :img, style: "display: block" %>
+    <%= form.text_field :img %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+-->
+
+  <% if user_signed_in? %>
+    <div class="container-sm" style="padding-top: 1%;">
+
+      <% if producto.errors.any? %> <!-- Mostrar errores -->
+        <div class="alert alert-danger">
+          <h4>Error:</h4>
+          <ul>
+            <% producto.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="row">
+
+        <div class="col-md-4 col-sm-12 mx-auto">
+          <%= image_tag('main/imgPlaceHolder.png', class: 'rounded', style: 'width: 100%; border: 1px solid black;', alt: 'productImg') %>
+        </div>
+
+        <div class="col-md-8 col-sm-12 mx-auto">
+          <%= form_with(model: producto) do |form| %>
+
+            <p style="color: red"><%= flash[:error] %></p>
+            <p style="color: green"><%= flash[:success] %></p>
+
+            <div class="form-group">
+              <label style="font-size: 20px">Nombre del producto</label>
+              <%= form.text_field :nombre, class: 'form-control', placeholder: 'Ingrese el nombre del producto' %>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label style="font-size: 20px">Precio</label>
+              <%= form.number_field :precio, class: 'form-control', placeholder: 'Ingrese el precio' %>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label style="font-size: 20px">Marca</label>
+              <%= form.text_field :marca, class: 'form-control', placeholder: 'Ingrese la marca' %>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label style="font-size: 20px">Tipo</label>
+              <%= form.select :tipo, options_for_select(['tabla', 'rulemanes', 'ruedas', 'trucks', 'hardware', 'lija', 'skateCompleto']), {}, class: 'form-select', placeholder: 'Seleccionar...' %>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label style="font-size: 20px">Imagen</label>
+              <%= form.file_field :img, class: 'form-control form-control-sm', id: 'formFile', style: 'font-size: 20px' %>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-dark" name="submit" value="Subir Archivos">Enviar</button>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <p>Usted no ha ingresado como administrador. Haga click <%= link_to 'aquí', new_user_session_path %> para hacerlo</p>
+  <% end %>
+

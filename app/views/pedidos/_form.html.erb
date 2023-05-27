@@ -1,0 +1,52 @@
+<%= form_with(model: pedido) do |form| %>
+  <% if pedido.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pedido.errors.count, "error") %> prohibited this pedido from being saved:</h2>
+
+      <ul>
+        <% pedido.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :tabla, style: "display: block" %>
+    <%= form.text_field :tabla %>
+  </div>
+
+  <div>
+    <%= form.label :trucks, style: "display: block" %>
+    <%= form.text_field :trucks %>
+  </div>
+
+  <div>
+    <%= form.label :ruedas, style: "display: block" %>
+    <%= form.text_field :ruedas %>
+  </div>
+
+  <div>
+    <%= form.label :rulemanes, style: "display: block" %>
+    <%= form.text_field :rulemanes %>
+  </div>
+
+  <div>
+    <%= form.label :lija, style: "display: block" %>
+    <%= form.text_field :lija %>
+  </div>
+
+  <div>
+    <%= form.label :hardware, style: "display: block" %>
+    <%= form.text_field :hardware %>
+  </div>
+
+  <div>
+    <%= form.label :nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<%= render "welcome/navbar" %>
+
+    <div class="container-xl" style="padding-top: 50px">
+        <h1>Nuestros productos</h1>
+        <div class="row">
+        <% @productos = Producto.all %>
+        <% @productos.each do |producto| %>
+
+            <div class="photo col-md-3 col-sm-6 mx-auto" style="padding-top: 15px;">
+                <div class="card rounded zoom" style="width: 100%; text-align: center;">
+                    <img class="card-img-top" src="<%= producto.img.url %>" alt="product_img">
+                    <div class="card-body">
+                        <h2 style="color: black"> <%= producto.nombre %> </h2>
+                        <h3 style="color: black" class="card-subtitle mt-2"> $<%= producto.precio %> </h3>
+                    </div>
+                </div>
+            </div>
+
+        <% end %>
+        </div>
+    </div>
+
+<%= render "welcome/footer" %>

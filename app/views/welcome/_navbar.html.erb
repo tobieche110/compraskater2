@@ -1,0 +1,18 @@
+<nav class="navbar py-5" style="border-bottom: 1px solid black ;">
+        <div class="container-sm mx-auto">
+            <%= link_to root_path do %>
+                <%= image_tag('main/logo.png', alt: 'Site Logo', style: 'height: 150px;') %>
+            <% end %>
+
+            <div class="justify-content-end" id="navbarNav">
+                <%= link_to "Productos", verproductos_path, class: "btn btn-nav btn-light btn-outline-dark"  %>
+                <%= link_to "Arma tu Skate", armatuskate_path, class: "btn btn-nav btn-light btn-outline-dark"  %>
+                <%= link_to "¿Quienes Somos?", quienessomos_path, class: "btn btn-nav btn-light btn-outline-dark"  %>
+                <% if user_signed_in? %>
+                    <%= link_to "Administrar Productos", productos_path, class: "btn btn-nav btn-secondary btn-outline-dark" %>
+                    <%= link_to "Pedidos", pedidos_path, class: "btn btn-nav btn-secondary btn-outline-dark" %>
+                <% end %>
+
+            </div>
+        </div>
+</nav>

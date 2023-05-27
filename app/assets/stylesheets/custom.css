@@ -1,0 +1,32 @@
+body {
+    margin-top: 0 !important;
+}
+
+/* Estilos para que las cartas se "levanten" al pasar el mouse sobre ellas y brillen si se clickean*/
+.zoom {
+    transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+    z-index: 9999;
+}
+
+.clickeable:hover{
+    cursor: pointer;
+}
+
+.card.clicked {
+    border: 2px solid #0d6efd;
+}
+
+/***********************************************/
+
+.banner {
+    border: 2px solid grey;
+}
+
+.custom-link {
+    color: grey;
+    text-decoration: none;
+}

@@ -1,0 +1,19 @@
+<%= render "welcome/navbar" %>
+
+<div class='container-xl'>
+    <div class='row'>
+        <h1>Arma tu skate</h1>
+        <h2>Usá nuestra herramienta para construir el skate de tus sueños.</h2>
+        <h4>Deberás elegir cada elemento e ingresar tu nombre para almacenar tu pedido.</h4>
+        <br>
+        <div class="d-flex justify-content-end align-items-center">
+            <h3><%= link_to " Comenzar", armatuskate_elegir_path, class: "bi bi-arrow-right-square-fill custom-link" %></h3>   
+        </div>
+        <div class="d-flex justify-content-end align-items-center">
+            <%= image_tag("main/armatuskatebanner", :alt => "...", :class => "img-fluid banner") %>
+        </div>
+    </div>
+
+</div>
+
+<%= render "welcome/footer" %>

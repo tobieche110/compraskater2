@@ -1,0 +1,131 @@
+<%= render "welcome/navbar" %>
+
+  <div class="container-xl" style="padding-top: 50px">
+    <h1>Arma tu skate</h1>
+    
+            <% tipo = ["tabla", "trucks", "ruedas", "rulemanes", "lija", "hardware"] %>
+
+            <% tipo.each do |elemento| %> <!--Bucle donde ciclamos el vector de tipo-->
+
+                <% @productos = Producto.where(tipo: elemento) %>
+                
+                <% if elemento.last == 's' %>
+                    <h2 style="padding-top: 2%">Elegí tus <%= elemento %>:</h2>
+                <% else %>
+                    <h2 style="padding-top: 2%">Elegí tu <%= elemento %>:</h2>
+                <% end %>
+                
+                <div class="row">
+
+                <% @productos.each do |producto| %> <!--Bucle donde ciclamos los productos del tipo-->
+
+                    <div class="photo col-md-3 col-sm-6 mx-auto" style="padding-top: 15px;">
+                        <div class="card rounded zoom clickeable" style="width: 100%; text-align: center;" onclick="addToCarro('<%= producto.id %>', '<%= producto.tipo %>', '<%= producto.nombre%>', this);">
+
+                            <img class="card-img-top" src="<%= producto.img.url %>" alt="product_img">
+
+                            <div class="card-body">
+                                <h2 style="color: black"> <%= producto.nombre %> </h2>
+
+                                <h3 style="color: black" class="card-subtitle mt-2"> $<%= producto.precio %> </h3>
+            
+                            </div>
+                        </div>
+                    </div>
+
+                <% end %>
+
+            <%end%>
+
+            <h5>Seleccionaste: </h5>
+            <p id = 'seleccionTabla'><strong>Tabla:</strong> </p>
+            <p id = 'seleccionTrucks'><strong>Trucks:</strong> </p>
+            <p id = 'seleccionRuedas'><strong>Ruedas:</strong> </p>
+            <p id = 'seleccionRulemanes'><strong>Rulemanes:</strong> </p>
+            <p id = 'seleccionLija'><strong>Lija:</strong> </p>
+            <p id = 'seleccionHardware'><strong>Hardware:</strong> </p>
+
+            <!-- Boton enviar -->
+            <%= form_with(url: pedidos_path, method: :post, id: 'myForm') do |form| %>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+                <input type="hidden" id="carro" name="carro" value="">
+                <%= form.submit "Enviar" %>
+            <% end %>
+        </div>
+    </div>
+
+<%= render "welcome/footer" %>
+
+<script>
+
+    var carro = ["", "", "", "", "", ""]; //Es el vector que almacenara un tipo de producto por espacio.
+
+    function addToCarro(productoId, productoTipo, productoNombre, element) { //esta funcion tambien hace que al clickear una carta, esta se resalte.
+        if (productoTipo == 'tabla'){
+            carro[0] = productoNombre;
+            seleccionTabla.innerHTML = '<strong>Tabla:</strong> '+productoNombre;
+        } else if (productoTipo == 'trucks'){
+            carro[1] = productoNombre;
+            seleccionTrucks.innerHTML = '<strong>Trucks:</strong> '+productoNombre;
+        } else if (productoTipo == 'ruedas'){
+            carro[2] = productoNombre;
+            seleccionRuedas.innerHTML = '<strong>Ruedas:</strong> '+productoNombre;
+        } else if (productoTipo == 'rulemanes'){
+            carro[3] = productoNombre;
+            seleccionRulemanes.innerHTML = '<strong>Rulemanes:</strong> '+productoNombre;
+        } else if (productoTipo == 'lija') {
+            carro[4] = productoNombre;
+            seleccionLija.innerHTML = '<strong>Lija:</strong> '+productoNombre;
+        } else if (productoTipo == 'hardware') {
+            carro[5] = productoNombre;
+            seleccionHardware.innerHTML = '<strong>Hardware:</strong> '+productoNombre;
+        }
+
+        // Actualizar el campo oculto con el contenido del array carro
+        document.getElementById('carro').value = JSON.stringify(carro);
+
+        // Agregar la clase 'clicked' a la carta
+        element.classList.add('clicked');
+  
+        // Eliminar la clase 'clicked' después de 2 segundos
+        setTimeout(function() {
+            element.classList.remove('clicked');
+        }, 1500);
+
+    }
+
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        // Evitar el envío del formulario por defecto
+        event.preventDefault();
+
+        // Realizar las validaciones aquí
+        if (!validarFormulario()) {
+            return;
+        }
+
+        // Si las validaciones pasan, enviar el formulario
+        this.submit();
+    });
+
+    function validarFormulario() {
+        var nombre = document.getElementById('nombre').value;
+        var carro = JSON.parse(document.getElementById('carro').value);
+
+        // Validar el campo "nombre"
+        if (nombre.trim() === '') {
+            alert('Por favor, complete el campo Nombre');
+            return false;
+        }
+
+        // Validar el array "carro"
+        for (var i = 0; i < carro.length; i++) {
+            if (carro[i] === '') {
+            alert('Por favor, complete todos los productos');
+            return false;
+            }
+        }
+
+        return true; // Si todas las validaciones pasan
+    }
+
+</script>

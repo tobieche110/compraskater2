@@ -1,0 +1,79 @@
+<!--
+<p style="color: green"><%= notice %></p>
+
+<h1>Pedidos</h1>
+
+<div id="pedidos">
+  <% @pedidos.each do |pedido| %>
+    <%= render pedido %>
+    <p>
+      <%= link_to "Show this pedido", pedido %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New pedido", new_pedido_path %>
+-->
+
+<%= render "welcome/navbar" %>
+
+<% if user_signed_in? %>
+
+<div class="container-xl">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 mx-auto">
+        <h1 style="padding-top: 2%;">Administrar Pedidos</h1>
+      </div>
+      <div class="col-md-6 col-sm-12 mx-auto d-grid gap-2 d-md-flex justify-content-md-end" style="padding-top: 1%;">
+        <!--<%= link_to "Agregar Pedido", new_pedido_path, class: "btn btn-nav btn-light btn-outline-dark" %>-->
+      </div>
+    </div>
+
+    <% if flash[:error].present? %>
+      <p style="color: red"><%= flash[:error] %></p>
+    <% end %>
+
+    <% if flash[:success].present? %>
+      <p style="color: green"><%= flash[:success] %></p>
+    <% end %>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#id</th>
+          <th scope="col">Nombre del Cliente</th>
+          <th scope="col">Tabla</th>
+          <th scope="col">Trucks</th>
+          <th scope="col">Ruedas</th>
+          <th scope="col">Rulemanes</th>
+          <th scope="col">Lija</th>
+          <th scope="col">Hardware</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pedidos.each do |pedido| %>
+          <tr>
+            <th scope="row"><%= pedido.id %></th>
+            <td><%= pedido.nombre %></td>
+            <td><%= pedido.tabla %></td>
+            <td><%= pedido.trucks %></td>
+            <td><%= pedido.ruedas %></td>
+            <td><%= pedido.rulemanes %></td>
+            <td><%= pedido.lija %></td>
+            <td><%= pedido.hardware %></td>
+
+            <td>
+              <!--<%= link_to "Editar", edit_pedido_path(pedido), class: "btn btn-primary" %>-->
+              <%= button_to "Eliminar", pedido_path(pedido), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este artículo?' }, class: "btn btn-danger", remote: true %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% else %>
+  <p>Por favor, ingrese sesión como administrador</p>
+<% end %>
+
+<%= render "welcome/footer" %>

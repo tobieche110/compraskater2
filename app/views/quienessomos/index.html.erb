@@ -1,0 +1,48 @@
+<%= render "welcome/navbar" %>
+
+<body>
+    
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <%= image_tag("main/quienessomos1.jpg", :alt => "...", :class => "d-block w-100") %>
+            <div class="carousel-caption">
+                <h5><strong>Somos un grupo de skaters argentinos con un solo objetivo:</strong></h5>
+                <p>Lograr que consigas el skate de tus sueños.</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <%= image_tag("main/quienessomos2.gif", :alt => "...", :class => "d-block w-100") %>
+            <div class="carousel-caption">
+                <h5><strong>Contamos con lo último en tablas,</strong></h5>
+                <p>rulemanes, trucks y todo lo que necesitas para construirlo.</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <%= image_tag("main/skate1.jpg", :alt => "...", :class => "d-block w-100") %>
+            <div class="carousel-caption">
+                <h5><strong>Armá tu Skate</strong></h5>
+                <p>Con la herramienta de última tecnología podés construir una patineta que se amolde a tus gustos y necesidades.</p>
+            </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+
+</div>
+  
+</body>
+
+<%= render "welcome/footer" %>
